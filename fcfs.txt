@@ -23,7 +23,6 @@ void scheduler(pr p[], int n)
  { 
  for (int j = 1; j < n - 1; j++) 
  { 
-Siddharth Unny 60004200080 A4 
  if (p[j].bt > p[j + 1].bt) 
  { 
  pr tmp1 = p[j]; 
