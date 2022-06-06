@@ -1,0 +1,90 @@
+Multithreading in Java: 
+There are two ways to create a thread:
+ 
+///////////////////////////////////////////////////////////////////////
+By extending Thread class 
+Here a Thread is created by inheriting the Thread class and 
+having a run method which can be started by using the start 
+method of the created instance of class. 
+
+class Multi extends Thread{ 
+public void run(){ 
+System.out.println("thread is running..."); 
+} 
+public static void main(String args[]){ 
+Multi t1=new Multi(); 
+t1.start(); 
+ } 
+} 
+/////////////////////////////////////////////////////////////////////////
+
+ By implementing Runnable interface. 
+Here we can inherit the interface Runnable which has a default 
+run method which we can overwrite in our class. In the main 
+function we can create instances of thread objects in which we 
+can pass our class object in to execute the run method. 
+
+class Multi3 implements Runnable{ 
+public void run(){ 
+System.out.println("thread is running..."); 
+} 
+ 
+public static void main(String args[]){ 
+Multi3 m1=new Multi3(); 
+Thread t1 =new Thread(m1); // Using the constructor 
+Thread(Runnable r) 
+t1.start(); 
+ } 
+
+
+//////////////////////////////////////////////////////////////////////////
+Code: 
+
+class Ticket extends Thread 
+{ 
+ int vacant = 3, required; 
+ Ticket (int x) 
+ { 
+ required = x; 
+ System.out.println(vacant + " tickets are avaialable"); 
+ } 
+ public void run () 
+ { 
+ if (required <= vacant) 
+ { 
+ System.out.println (required + " tickets booked for " + 
+ Thread.currentThread ().getName ()); 
+ 
+ try 
+ { 
+ Thread.sleep (100); 
+ } 
+ catch (Exception e) 
+ { 
+ } 
+ vacant = vacant - required; 
+ 
+ System.out.println(vacant + " tickets are avaialable"); 
+ 
+
+ } 
+ else 
+ { 
+ System.out.println (" Sorry no tickets avaialable " + 
+ Thread.currentThread ().getName ()); 
+ } 
+ } 
+} 
+class Main 
+{ 
+ public static void main (String z[]) 
+ { 
+ Ticket m = new Ticket(2); 
+ Thread t1 = new Thread (m); 
+ Thread t2 = new Thread (m); 
+ t1.setName ("User A"); 
+ t2.setName ("User B"); 
+ t1.start (); 
+ t2.start (); 
+ } 
+}
